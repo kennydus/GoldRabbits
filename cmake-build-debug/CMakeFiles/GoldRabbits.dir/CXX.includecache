@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/kenny/CLionProjects/GoldRabbits/BigInt.h
+vector
+-
+
+C:/Users/kenny/CLionProjects/GoldRabbits/main.cpp
+iostream
+-
+time.h
+-
+iomanip
+-
+string
+-
+climits
+-
+map
+-
+BigInt.h
+C:/Users/kenny/CLionProjects/GoldRabbits/BigInt.h
+

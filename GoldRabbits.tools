@@ -1,0 +1,12 @@
+#include "BigInt.h"
+#include <map>
+
+using namespace std;
+
+int goldRabbits(int n){
+
+}
+
+BigInt goldRabbits(BigInt n){
+
+}
