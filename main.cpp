@@ -52,26 +52,46 @@ int main()
     pause();
     BigInt display;
 
-    for(BigInt i=0; i<= BigInt(50); i++)    //todo getting stack overflow when i hits 100
-    {
-        cout << "\ngoldRabbits(" << i << ") = " << goldRabbits(i);
-    }
+//    for(BigInt i=0; i<= BigInt(50); i++)
+//    {
+//        cout << "\ngoldRabbits(" << i << ") = " << goldRabbits(i);
+//    }
     cout<< "\n\nThis is the long value of goldRabbits(3000)\n\n";
     BigInt gR3000 = goldRabbits(BigInt(3000));
     gR3000.print();
     cout<< "\n\nThis is the short value of goldRabbits(3000):"<<gR3000<<endl;
 
-    B1++;
-    cout<<"B1++:";
-    B1.print();
-    BigInt b10 = B1 + BigInt(1);
-    cout << "\nb10: ";
-    b10.print();
-
-    BigInt b11(0);
-    b11++;
-    b11.print();
-    cout << "\ncomparing 51 and 50: " << (BigInt(51) <= BigInt(50));
+//    B1++;
+//    cout<<"\nB1++:";
+//    B1.print();
+//    BigInt b10 = B1 + BigInt(1);
+//    cout << "\nb10: ";
+//    b10.print();
+//
+//    BigInt b11(0);
+//    cout << "\nb11: ";
+//    b11.print();
+//    b11 = b11 + BigInt(1);
+//    cout << "b11 after + BigInt(1): ";
+//    b11.print();
+//
+//    BigInt b12(3000);
+//    b12 = b12 - BigInt(2);
+//    cout << "\nb12:" << b12 << endl;
+//    b12 = B1;
+//    cout << "\nb12:";
+//    b12.print();
+//    B1++;
+//    cout << "\nb12:";
+//    b12.print();
+//    BigInt b30 = MAX;
+//    cout << "\nb30:" << b30 << endl;
+//    MAX = MAX - BigInt(10);
+//    cout << "\nb30:" << b30 << endl;
+//
+//    cout<< "BigInt(50):" << BigInt(50) << endl;
+//
+//    cout << "\ncomparing 51 and 50: " << (BigInt(51) <= BigInt(50)) << endl;
 
 }
 

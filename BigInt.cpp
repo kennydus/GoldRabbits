@@ -10,13 +10,15 @@ using namespace std;
 
 
 BigInt::BigInt(int n) {
+    if (n == 0)
+        digits.push_back((char)0);
     while (n > 0){
         int digit = n % 10;         // gets rightmost digit of n
         digits.push_back((char)digit);    // puts that rightmost digit inside our digits vector
         n /= 10;                // shift n once to the right to get next digit
     }
-    if (n == 0)
-        digits.push_back((char)0);
+//    if (n == 0)
+//        digits.push_back((char)0);
     reverse(digits.begin(), digits.end());
     numDigits = digits.size();
     isNegative = false;
@@ -79,7 +81,7 @@ BigInt BigInt::operator-(BigInt other) {
         if (borrow == 1) {
             int singleDifference = (int) this->digits[i] - borrow;
             if (singleDifference < 0)
-                singleDifference = 10 - singleDifference;
+                singleDifference = 10 + singleDifference;
             else
                 borrow = 0;
             totalDifference += (to_string(singleDifference));
@@ -87,12 +89,23 @@ BigInt BigInt::operator-(BigInt other) {
         else
             totalDifference += (to_string(this->digits[i]));
     }
+    //remove leading zeros
+    while (totalDifference.length() > 1){
+        if (totalDifference.at(totalDifference.length() - 1) == '0')
+            totalDifference.pop_back();
+        else
+            break;
+    }
+
+
     reverse(totalDifference.begin(), totalDifference.end());
     reverse(this->digits.begin(), this->digits.end());      // revert "this" object vector to correct order
     BigInt difference(totalDifference);
     if (borrow == 1){
         difference.isNegative = true;
-        cout << "something is negative!" << endl;}
+        cout << "something is negative!" << endl;
+        return BigInt(0);
+    }
     return difference;
 }
 
@@ -134,6 +147,16 @@ BigInt BigInt::operator+(BigInt other) {
     if (carry == 1) // checking to see if a new digit needs to be added (carry to empty space) ex 9 + 1 = 10 and not 0
         totalSum += "1";
 
+    //remove leading zeros
+    while (totalSum.length() > 1) {
+        if (totalSum.at(totalSum.length() - 1) == '0')
+            totalSum.pop_back();
+        else
+            break;
+    }
+//    if (totalSum.at(totalSum.length() - 1) == '0' && totalSum.length() > 1)
+//        totalSum.pop_back();
+
     reverse(totalSum.begin(), totalSum.end());
     reverse(this->digits.begin(), this->digits.end());      // revert "this" object vector to correct order
     return BigInt(totalSum);
@@ -154,7 +177,6 @@ int BigInt::operator<=(const BigInt& other) const {
     }
     // When lengths of BigInts differ, compare their lengths
     return numDigits < other.numDigits;
-    return (numDigits < other.numDigits);
 }
 
 BigInt::BigInt() {
@@ -175,7 +197,6 @@ int BigInt::operator<(const BigInt &other) const {
     }
     // When lengths of BigInts differ, compare their lengths
     return numDigits < other.numDigits;
-    return (numDigits < other.numDigits);
 }
 
 BigInt operator++(BigInt& bigInt, int dummy) {
