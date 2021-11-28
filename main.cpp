@@ -13,21 +13,35 @@ int goldRabbits(int); // prototype or signature
 
 void pause() {cout << "Press Enter to continue..."; getchar();} // utility function
 
+
+
+
+BigInt goldRabbits(BigInt n) {
+    static map<BigInt, BigInt> rabbit_map;
+
+
+    if (n <= BigInt(1)) {
+        rabbit_map[n] = BigInt(1);
+        rabbit_map.insert({n, BigInt(1)});
+        return rabbit_map.at(n);
+    }
+
+    // check if the key exists for 'n'
+    if (rabbit_map.find(n) != rabbit_map.end())
+        //it exists!
+        return rabbit_map.at(n);
+
+
+    // key doesn't exist for 'n'
+    // make a key in the map and return the value of the key
+    rabbit_map[n] = goldRabbits(n - BigInt(1)) + goldRabbits(n - BigInt(2));
+    return rabbit_map.at(n);
+}
+
+
+
 int main()
 {
-//    int const months = 12 * 10;  			    // this is 10 years or 120 months
-//    int start = time(0);  				// number of seconds since Jan 1, 1970
-
-    map<int, BigInt> results;
-//
-//    for(int i=0; i<months; i++)
-//    {
-//        int current = time(0);  			// number of seconds since program started
-//        cout << setw(5)<<current-start<<":";	// print elapsed seconds
-//        cout << "  GoldRabbits("<<setw(2)<<i<<") = ";
-//        cout << setw(11)<< goldRabbits(i) <<endl;// the call to goldRabbits
-//    }
-
     BigInt B1("123456789123456789123456789123456789");
     BigInt B2(B1);
     BigInt MAX(INT_MAX);
@@ -36,31 +50,35 @@ int main()
     cout << "\nB1:";
     B1.print();
     pause();
+    BigInt display;
 
-    BigInt B3 = B1 + B2;
-    cout << "\nB3:";
-    B3.print();
+    for(BigInt i=0; i<= BigInt(50); i++)    //todo getting stack overflow when i hits 100
+    {
+        cout << "\ngoldRabbits(" << i << ") = " << goldRabbits(i);
+    }
+    cout<< "\n\nThis is the long value of goldRabbits(3000)\n\n";
+    BigInt gR3000 = goldRabbits(BigInt(3000));
+    gR3000.print();
+    cout<< "\n\nThis is the short value of goldRabbits(3000):"<<gR3000<<endl;
 
-    BigInt B4 = B1 - BigInt("9999");
-    cout << "\nB4:";
-    B4.print();
+    B1++;
+    cout<<"B1++:";
+    B1.print();
+    BigInt b10 = B1 + BigInt(1);
+    cout << "\nb10: ";
+    b10.print();
 
-    cout<<"creating neg..." << endl;
-    BigInt neg = B1 - (BigInt("123456789123456789123456789123456790"));
-    cout << "\nneg:";
-    neg.print(); cout << endl;
-
-
-    cout << "B1:"<<B1<<"\nB2:"<<B2<<"\nMAX:"<<MAX<<endl;
-
-    cout << "\n0 < 1: " << (0<1) << "\n1 < 0:" << (1<0) << endl;
+    BigInt b11(0);
+    b11++;
+    b11.print();
+    cout << "\ncomparing 51 and 50: " << (BigInt(51) <= BigInt(50));
 
 }
 
 // this is the goldRabbits function
 int goldRabbits(int n)
 {
-    static map<int, BigInt> rabbit_map;     // keeps track of all previously calculated results for goldRabbits(n)
+    static map<int, BigInt> int_rabbit_map;     // keeps track of all previously calculated results for goldRabbits(n)
 
     if (n==0 || n==1)
         return 1;
@@ -68,11 +86,5 @@ int goldRabbits(int n)
         return goldRabbits(n-1) + goldRabbits(n-2);
 }
 
-BigInt goldRabbits(BigInt n){
-    static map<BigInt, BigInt> rabbit_map;
-    if (n < BigInt(0) || n < BigInt(1)){
 
-    }
 
-    return BigInt(0);
-}
