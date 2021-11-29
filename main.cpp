@@ -19,24 +19,44 @@ void pause() {cout << "Press Enter to continue..."; getchar();} // utility funct
 BigInt goldRabbits(BigInt n) {
     static map<BigInt, BigInt> rabbit_map;
 
-
+    // insert value BigInt(1) if n is 0 or 1
     if (n <= BigInt(1)) {
-        rabbit_map[n] = BigInt(1);
         rabbit_map.insert({n, BigInt(1)});
-        return rabbit_map.at(n);
     }
 
     // check if the key exists for 'n'
-    if (rabbit_map.find(n) != rabbit_map.end())
-        //it exists!
-        return rabbit_map.at(n);
+    else if (rabbit_map.find(n) == rabbit_map.end())
+        //it does not exist
+        // make a key in the map and return the value of the key
+        rabbit_map[n] = goldRabbits(n - BigInt(1)) + goldRabbits(n - BigInt(2));
 
-
-    // key doesn't exist for 'n'
-    // make a key in the map and return the value of the key
-    rabbit_map[n] = goldRabbits(n - BigInt(1)) + goldRabbits(n - BigInt(2));
+    // value now exists for key 'n' inside of map- return the value
     return rabbit_map.at(n);
 }
+
+// this is the goldRabbits function
+int goldRabbits(int n)
+{
+    // keeps track of all previously calculated results for goldRabbits(n)
+    static map<int, int> int_rabbit_map;
+
+    if (n==0 || n==1)
+        int_rabbit_map.insert({n, 1});
+
+    // if the key doesn't exist
+    else if (int_rabbit_map.find(n) == int_rabbit_map.end()){
+        int rabbits = goldRabbits(n - 1) + goldRabbits(n - 2);
+        // checks for overflow. if rabbits < 0 (or negative), then we have overflow
+        if (rabbits > 0)
+            int_rabbit_map.insert({n, rabbits});
+        else{
+            string except = "Overflow Error - goldRabbits overflowed using " + to_string(n);
+            throw except;
+        }
+    }
+        return int_rabbit_map.at(n);
+}
+
 
 
 
@@ -52,14 +72,27 @@ int main()
     pause();
     BigInt display;
 
-//    for(BigInt i=0; i<= BigInt(50); i++)
-//    {
-//        cout << "\ngoldRabbits(" << i << ") = " << goldRabbits(i);
-//    }
+    for(BigInt i=0; i<= BigInt(50); i++)
+    {
+        cout << "\ngoldRabbits(" << i << ") = " << goldRabbits(i);
+    }
     cout<< "\n\nThis is the long value of goldRabbits(3000)\n\n";
     BigInt gR3000 = goldRabbits(BigInt(3000));
     gR3000.print();
     cout<< "\n\nThis is the short value of goldRabbits(3000):"<<gR3000<<endl;
+    pause();
+    int n = 500;
+    try{
+        cout << "\nThe value of goldRabbits(" << n << ") is: ";
+        cout << goldRabbits(n) << endl;
+    }
+    catch(const string& error)
+    {
+        cout << error << endl;
+        cout << "Transitioning to BigInt\n";
+        cout << goldRabbits(BigInt(n)) << endl;
+    }
+    pause();
 
 //    B1++;
 //    cout<<"\nB1++:";
@@ -95,16 +128,6 @@ int main()
 
 }
 
-// this is the goldRabbits function
-int goldRabbits(int n)
-{
-    static map<int, BigInt> int_rabbit_map;     // keeps track of all previously calculated results for goldRabbits(n)
-
-    if (n==0 || n==1)
-        return 1;
-    else
-        return goldRabbits(n-1) + goldRabbits(n-2);
-}
 
 
 
