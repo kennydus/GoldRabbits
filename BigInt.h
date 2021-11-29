@@ -10,7 +10,7 @@ using namespace std;
 
 class BigInt {
     private:
-        vector<char> digits;
+    vector<char> digits;
         int numDigits;
         bool isNegative;
     public:
@@ -20,7 +20,10 @@ class BigInt {
         friend ostream& operator<<(ostream& out, const BigInt& BigInt);
         BigInt operator-(BigInt other);
         BigInt operator+(BigInt other);
-        int operator<(BigInt other);
+        int operator<=(const BigInt& other) const;
+        int operator<(const BigInt& other) const;
+        friend BigInt operator++(BigInt& bigInt, int dummy);
+
 
         // need to overload
         //  operator<() - required by map
@@ -29,6 +32,7 @@ class BigInt {
 
 
 
+    BigInt();
 };
 
 

@@ -10,19 +10,23 @@ C:/Users/kenny/CLionProjects/GoldRabbits/BigInt.h
 vector
 -
 
+C:/Users/kenny/CLionProjects/GoldRabbits/GoldRabbits.tools
+BigInt.h
+C:/Users/kenny/CLionProjects/GoldRabbits/BigInt.h
+map
+-
+
 C:/Users/kenny/CLionProjects/GoldRabbits/main.cpp
+climits
+-
 iostream
 -
-time.h
--
-iomanip
--
 string
--
-climits
 -
 map
 -
 BigInt.h
 C:/Users/kenny/CLionProjects/GoldRabbits/BigInt.h
+GoldRabbits.tools
+C:/Users/kenny/CLionProjects/GoldRabbits/GoldRabbits.tools
 

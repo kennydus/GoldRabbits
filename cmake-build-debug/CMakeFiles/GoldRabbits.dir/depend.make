@@ -5,5 +5,6 @@ CMakeFiles\GoldRabbits.dir\BigInt.cpp.obj: ..\BigInt.cpp
 CMakeFiles\GoldRabbits.dir\BigInt.cpp.obj: ..\BigInt.h
 
 CMakeFiles\GoldRabbits.dir\main.cpp.obj: ..\BigInt.h
+CMakeFiles\GoldRabbits.dir\main.cpp.obj: ..\GoldRabbits.tools
 CMakeFiles\GoldRabbits.dir\main.cpp.obj: ..\main.cpp
 
